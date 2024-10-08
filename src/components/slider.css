@@ -1,0 +1,30 @@
+.slider {
+    height: 10px;
+    border-radius: 8px;
+    background-color: var(--grey-200);
+    position: relative;
+    cursor: pointer;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--grey-400);
+    outline: 4px solid var(--grey-950);
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    translate: -50% -50%;
+    z-index: 1;
+}
+
+.filler {
+    width: 0px;
+    height: 100%;
+    border-radius: 8px;
+    background-color: var(--grey-400);
+    position: absolute;
+    top: 0;
+    left: 0;
+}

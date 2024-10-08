@@ -1,0 +1,10 @@
+.wrapper {
+    height: 100dvh;
+    display: grid;
+    grid-template-rows: 1;
+    grid-template-columns: 400px 1fr;
+}
+
+@media (max-width: 600px) {
+
+}

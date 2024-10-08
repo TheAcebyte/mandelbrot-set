@@ -1,8 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url(https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css);
 
-body {
-    background-color: black;
-    overflow: hidden;
+:root {
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --gray-300: #dee2e6;
+    --gray-400: #ced4da;
+    --gray-500: #adb5bd;
+    --gray-600: #6c757d;
+    --gray-700: #495057;
+    --gray-800: #343a40;
+    --gray-900: #212529;
+
+    --grey-50: #f6f6f6;
+    --grey-100: #e7e7e7;
+    --grey-200: #d1d1d1;
+    --grey-300: #b0b0b0;
+    --grey-400: #888888;
+    --grey-500: #6d6d6d;
+    --grey-600: #5d5d5d;
+    --grey-700: #4a4a4a;
+    --grey-800: #454545;
+    --grey-900: #3d3d3d;
+    --grey-950: #262626;
+
+    --button-dark: #500000;
+    --button-light: #ff5757;
+}
+
+* {
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: black;
+    overflow: hidden;
 }

@@ -1,0 +1,134 @@
+.settings-wrapper {
+    background-color: var(--grey-950);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.top-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.title {
+    color: var(--grey-100);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.title i {
+    font-size: 2rem;
+}
+
+.title h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+.option {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.option-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.option-header h2 {
+    color: var(--grey-300);
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.option-header p {
+    color: var(--gray-200);
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.colors-wrapper {
+    height: 400px;
+    border-radius: 8px;
+    background-color: var(--grey-900);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+    overflow-y: scroll;
+    scrollbar-color: var(--grey-200) var(--grey-700);
+}
+
+.colors-wrapper li {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.colors-wrapper .identifier {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.colors-wrapper .identifier .color-input {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid var(--grey-300);
+    position: relative;
+    cursor: pointer;
+}
+
+.colors-wrapper .identifier .color-input input {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.colors-wrapper .identifier p {
+    color: var(--grey-100);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.colors-wrapper i {
+    font-size: 1.5rem;
+    color: var(--button-dark);
+}
+
+.bottom-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+#reset {
+    outline: none;
+    border: none;
+    background-color: var(--button-light);
+    color: var(--gray-300);
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+#reset::after {
+    content: '';
+    height: 3px;
+    width: 100%;
+    background-color: var(--button-dark);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}

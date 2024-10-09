@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Slider from './slider.tsx';
+import Slider from './settings/slider.tsx';
 import './settings.css';
 
 const baseSettings = {
@@ -28,18 +28,52 @@ function Settings() {
     const [maxIterations, setMaxIterations] = useState(100);
     const [colors, setColors] = useState(['#321322', '#321322', '#321322']);
 
-    const changeColor = (e: any, index: number) => {
-        const color = e.target.value;
-        const left = colors.slice(0, index);
-        const right = colors.slice(index + 1, colors.length);
-
-        const result = left.concat([color].concat(right));
-        setColors(result);
+    const resetColors = () => {
+        setColors([...baseSettings.colors]);
     }
 
-    useEffect(() => {
-        setColors(baseSettings.colors);
-    }, []);
+    const addColor = () => {
+        setColors([...colors, '#000000']);
+    }
+
+    const changeColor = (e: any, index: number) => {
+        const color = e.target.value;
+        const leftRemaining = colors.slice(0, index);
+        const rightRemaining = colors.slice(index + 1, colors.length);
+
+        setColors([...leftRemaining, color, ...rightRemaining]);
+    }
+
+    const moveColorUp = (index: number) => {
+        if (index > 0) {
+            const top = colors[index - 1];
+            const bottom = colors[index];
+            const leftRemaining = colors.slice(0, index - 1);
+            const rightRemaining = colors.slice(index + 1, colors.length);
+            
+            setColors([...leftRemaining, bottom, top, ...rightRemaining]);
+        }
+    }
+    
+    const moveColorDown = (index: number) => {
+        if (index < colors.length - 1) {
+            const top = colors[index];
+            const bottom = colors[index + 1];
+            const leftRemaining = colors.slice(0, index);
+            const rightRemaining = colors.slice(index + 2, colors.length);
+            
+            setColors([...leftRemaining, bottom, top, ...rightRemaining]);
+        }
+    }
+
+    const deleteColor = (index: number) => {
+        const leftRemaining = colors.slice(0, index);
+        const rightRemaining = colors.slice(index + 1, colors.length);
+
+        setColors([...leftRemaining, ...rightRemaining]);
+    }
+
+    useEffect(resetColors, []);
 
     return (
         <div className="settings-wrapper">
@@ -60,6 +94,10 @@ function Settings() {
                 <div className="option">
                     <div className="option-header">
                         <h2>Colors</h2>
+                        <div className="icons-wrapper">
+                            <i className='bx bx-reset' onClick={resetColors}></i>
+                            <i className='bx bx-list-plus' onClick={addColor}></i>
+                        </div>
                     </div>
                     <ul className="colors-wrapper">
                         {colors.map((color, index) =>
@@ -70,10 +108,10 @@ function Settings() {
                                     </div>
                                     <p>{color}</p>
                                 </div>
-                                <div className="buttons">
-                                    <i className='bx bx-down-arrow-alt'></i>
-                                    <i className='bx bx-up-arrow-alt'></i>
-                                    <i className='bx bx-trash'></i>
+                                <div className="icons-wrapper">
+                                    <i className='bx bx-up-arrow-alt' onClick={() => moveColorUp(index)}></i>
+                                    <i className='bx bx-down-arrow-alt' onClick={() => moveColorDown(index)}></i>
+                                    <i className='bx bx-trash' onClick={() => deleteColor(index)}></i>
                                 </div>
                             </li>
                         )}

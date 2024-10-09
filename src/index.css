@@ -26,6 +26,10 @@
 
     --button-dark: #500000;
     --button-light: #ff5757;
+    --add-icon: #92e397;
+    --add-icon-hover: #c2f0c4;
+    --delete-icon: #c4544a;
+    --delete-icon-hover: #ff8c8c;
 }
 
 * {

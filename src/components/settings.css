@@ -1,9 +1,13 @@
+.icons-wrapper i {
+    cursor: pointer;
+    transition: color 0.1s;
+}
+
 .settings-wrapper {
     background-color: var(--grey-950);
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     justify-content: space-between;
 }
 
@@ -39,6 +43,7 @@
 .option-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .option-header h2 {
@@ -53,19 +58,41 @@
     font-weight: 700;
 }
 
+.option-header .icons-wrapper {
+    font-size: 1.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.option-header .icons-wrapper .bx-reset {
+    color: var(--grey-300);
+}
+
+.option-header .icons-wrapper .bx-reset:hover {
+    color: var(--grey-50);
+}
+
+.option-header .icons-wrapper .bx-list-plus {
+    color: var(--add-icon);
+}
+
+.option-header .icons-wrapper .bx-list-plus:hover {
+    color: var(--add-icon-hover);
+}
+
 .colors-wrapper {
-    height: 400px;
+    max-height: 375px;
     border-radius: 8px;
-    background-color: var(--grey-900);
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    padding: 1rem;
+    gap: 0.5rem;
     overflow-y: scroll;
     scrollbar-color: var(--grey-200) var(--grey-700);
 }
 
 .colors-wrapper li {
+    padding: 0.75rem;
+    background-color: var(--grey-900);
     list-style: none;
     display: flex;
     justify-content: space-between;
@@ -98,12 +125,35 @@
 .colors-wrapper .identifier p {
     color: var(--grey-100);
     font-weight: 600;
-    letter-spacing: 1px;
 }
 
-.colors-wrapper i {
+.colors-wrapper .icons-wrapper {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.colors-wrapper .icons-wrapper i {
+    cursor: pointer;
+    color: var(--grey-200);
     font-size: 1.5rem;
-    color: var(--button-dark);
+}
+
+.colors-wrapper .icons-wrapper i:hover {
+    color: var(--grey-50);
+}
+
+.colors-wrapper .icons-wrapper .bx-trash {
+    color: var(--delete-icon);
+}
+
+.colors-wrapper .icons-wrapper .bx-trash:hover {
+    color: var(--delete-icon-hover);
+}
+
+.colors-wrapper li:first-of-type .bx-up-arrow-alt,
+.colors-wrapper li:last-of-type .bx-down-arrow-alt {
+    cursor: default;
+    color: var(--grey-500);
 }
 
 .bottom-wrapper {

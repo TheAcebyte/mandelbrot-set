@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { getMin, getMax, map } from '../utils.ts';
+import { getMin, getMax, map } from '../../utils.ts';
 import './slider.css';
 
 type SliderProps = {

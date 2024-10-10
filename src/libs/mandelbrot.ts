@@ -1,7 +1,7 @@
 import { getMin, mapFloat } from './utils.ts';
 
 function drawMandelbrot(canvas: HTMLCanvasElement, maxIterations: number, colors: string[]) {
-    canvas.style.backgroundColor = getColor(2, maxIterations, colors);
+    colorCanvas(canvas, maxIterations, colors);
     const size = getMin(canvas.width, canvas.height);
 
     const centerWidth = size == canvas.height ? (canvas.width >> 1) - (size >> 1) : 0;
@@ -54,4 +54,8 @@ function resizeCanvas(canvas: HTMLCanvasElement, width: number, height: number) 
     canvas.height = height;
 }
 
-export { drawMandelbrot, resizeCanvas, drawPoint };
+function colorCanvas(canvas: HTMLElement, maxIterations: number, colors: string[]) {
+    canvas.style.backgroundColor = getColor(2, maxIterations, colors);
+}
+
+export { drawMandelbrot, resizeCanvas };

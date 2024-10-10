@@ -1,7 +1,14 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Slider from './options/slider.tsx';
 import ColorList from './options/color_list.tsx';
 import './settings.css';
+
+type settingsProps = {
+    iterGetter: number,
+    iterSetter: any,
+    colorGetter: string[],
+    colorSetter: any
+}
 
 const baseSettings = {
     maxIterations: 100,
@@ -49,15 +56,20 @@ function Cogs({ parentRef }: { parentRef: any }) {
     );
 }
 
-type settingsProps = {
-    maxIterations: number,
-    setMaxIterations: any,
-    colors: string[],
-    setColors: any
-}
-
-function Settings({ maxIterations, setMaxIterations, colors, setColors }: settingsProps) {
+function Settings({ iterGetter, iterSetter, colorGetter, colorSetter }: settingsProps) {
     const wrapperRef = useRef<HTMLDivElement>(null);
+    const [maxIterations, setMaxIterations] = useState(iterGetter);
+    const [colors, setColors] = useState(colorGetter);
+    
+    useEffect(() => {
+        iterSetter(baseSettings.maxIterations);
+        colorSetter(baseSettings.colors);
+    }, []);
+
+    const applySettings = () => {
+        iterSetter(maxIterations);
+        colorSetter(colors);
+    }
 
     return (
         <div className="settings-wrapper" ref={wrapperRef}>
@@ -70,7 +82,7 @@ function Settings({ maxIterations, setMaxIterations, colors, setColors }: settin
             </div>
 
             <div className="bottom-wrapper">
-                <button id="reset">Apply Settings</button>
+                <button id="reset" onClick={applySettings}>Apply Settings</button>
             </div>
 
             <Cogs parentRef={wrapperRef}/>

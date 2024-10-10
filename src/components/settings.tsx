@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import Slider from './settings/slider.tsx';
+import { useState, useRef } from 'react';
+import Slider from './options/slider.tsx';
+import ColorList from './options/color_list.tsx';
 import './settings.css';
 
 const baseSettings = {
@@ -24,104 +25,55 @@ const baseSettings = {
     ]
 }
 
-function Settings() {
-    const [maxIterations, setMaxIterations] = useState(100);
-    const [colors, setColors] = useState(['#321322', '#321322', '#321322']);
-
-    const resetColors = () => {
-        setColors([...baseSettings.colors]);
-    }
-
-    const addColor = () => {
-        setColors([...colors, '#000000']);
-    }
-
-    const changeColor = (e: any, index: number) => {
-        const color = e.target.value;
-        const leftRemaining = colors.slice(0, index);
-        const rightRemaining = colors.slice(index + 1, colors.length);
-
-        setColors([...leftRemaining, color, ...rightRemaining]);
-    }
-
-    const moveColorUp = (index: number) => {
-        if (index > 0) {
-            const top = colors[index - 1];
-            const bottom = colors[index];
-            const leftRemaining = colors.slice(0, index - 1);
-            const rightRemaining = colors.slice(index + 1, colors.length);
-            
-            setColors([...leftRemaining, bottom, top, ...rightRemaining]);
-        }
-    }
+function Cogs({ parentRef }: { parentRef: any }) {
+    const [active, setActive] = useState(false);
+    const foregroundCogRef = useRef<HTMLElement>(null);
+    const backgroundCogRef = useRef<HTMLElement>(null);
     
-    const moveColorDown = (index: number) => {
-        if (index < colors.length - 1) {
-            const top = colors[index];
-            const bottom = colors[index + 1];
-            const leftRemaining = colors.slice(0, index);
-            const rightRemaining = colors.slice(index + 2, colors.length);
-            
-            setColors([...leftRemaining, bottom, top, ...rightRemaining]);
-        }
+    const slideSettings = () => {
+        const value = active ? -100 : 0;
+        const angle = active ? 0 : 360;
+
+        parentRef.current!.style.translate = `${value}%`;
+        foregroundCogRef.current!.style.rotate = `${angle}deg`;
+        backgroundCogRef.current!.style.rotate = `${-angle}deg`;
+
+        setActive(!active);
     }
-
-    const deleteColor = (index: number) => {
-        const leftRemaining = colors.slice(0, index);
-        const rightRemaining = colors.slice(index + 1, colors.length);
-
-        setColors([...leftRemaining, ...rightRemaining]);
-    }
-
-    useEffect(resetColors, []);
 
     return (
-        <div className="settings-wrapper">
+        <>
+            <i className='bx bxs-cog' id="foreground-cog" ref={foregroundCogRef} onClick={slideSettings}></i>
+            <i className='bx bxs-cog' id="background-cog" ref={backgroundCogRef}></i>
+        </>
+    );
+}
+
+type settingsProps = {
+    maxIterations: number,
+    setMaxIterations: any,
+    colors: string[],
+    setColors: any
+}
+
+function Settings({ maxIterations, setMaxIterations, colors, setColors }: settingsProps) {
+    const wrapperRef = useRef<HTMLDivElement>(null);
+
+    return (
+        <div className="settings-wrapper" ref={wrapperRef}>
             <div className="top-wrapper">
                 <div className="title">
-                    <i className='bx bxs-cog'></i>
                     <h1>Settings</h1>
                 </div>
-
-                <div className="option">
-                    <div className="option-header">
-                        <h2>Max Iterations</h2>
-                        <p className="stat">{maxIterations}</p>
-                    </div>
-                    <Slider setter={setMaxIterations} base={baseSettings.maxIterations} min={10} max={200} step={1}/>
-                </div>
-
-                <div className="option">
-                    <div className="option-header">
-                        <h2>Colors</h2>
-                        <div className="icons-wrapper">
-                            <i className='bx bx-reset' onClick={resetColors}></i>
-                            <i className='bx bx-list-plus' onClick={addColor}></i>
-                        </div>
-                    </div>
-                    <ul className="colors-wrapper">
-                        {colors.map((color, index) =>
-                            <li key={index}>
-                                <div className="identifier">
-                                    <div className="color-input" style={{backgroundColor: color}}>
-                                        <input type="color" onChange={(e) => changeColor(e, index)}/>
-                                    </div>
-                                    <p>{color}</p>
-                                </div>
-                                <div className="icons-wrapper">
-                                    <i className='bx bx-up-arrow-alt' onClick={() => moveColorUp(index)}></i>
-                                    <i className='bx bx-down-arrow-alt' onClick={() => moveColorDown(index)}></i>
-                                    <i className='bx bx-trash' onClick={() => deleteColor(index)}></i>
-                                </div>
-                            </li>
-                        )}
-                    </ul>
-                </div>
+                <Slider getter={maxIterations} setter={setMaxIterations} base={baseSettings.maxIterations} min={10} max={200} step={1}/>
+                <ColorList getter={colors} setter={setColors} base={baseSettings.colors}/>
             </div>
 
             <div className="bottom-wrapper">
                 <button id="reset">Apply Settings</button>
             </div>
+
+            <Cogs parentRef={wrapperRef}/>
         </div>
     );
 }

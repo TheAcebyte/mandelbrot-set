@@ -1,0 +1,110 @@
+.option-header .icons-wrapper {
+    font-size: 1.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.option-header .icons-wrapper .bx-reset {
+    color: var(--grey-300);
+}
+
+.option-header .icons-wrapper .bx-reset:hover {
+    color: var(--grey-50);
+}
+
+.option-header .icons-wrapper .bx-list-plus {
+    color: var(--add-icon);
+}
+
+.option-header .icons-wrapper .bx-list-plus:hover {
+    color: var(--add-icon-hover);
+}
+
+.colors-wrapper {
+    height: 375px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: scroll;
+    scrollbar-color: var(--grey-200) var(--grey-700);
+}
+
+.colors-wrapper li {
+    padding: 0.75rem;
+    background-color: var(--grey-900);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.colors-wrapper .identifier {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.colors-wrapper .identifier .color-input {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid var(--grey-300);
+    position: relative;
+    cursor: pointer;
+}
+
+.colors-wrapper .identifier .color-input input {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.colors-wrapper .identifier p {
+    text-transform: uppercase;
+    color: var(--grey-100);
+    font-weight: 600;
+}
+
+.colors-wrapper .icons-wrapper {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.colors-wrapper .icons-wrapper i {
+    cursor: pointer;
+    color: var(--grey-200);
+    font-size: 1.5rem;
+}
+
+.colors-wrapper .icons-wrapper i:hover {
+    color: var(--grey-50);
+}
+
+.colors-wrapper .icons-wrapper .bx-trash {
+    color: var(--delete-icon);
+}
+
+.colors-wrapper .icons-wrapper .bx-trash:hover {
+    color: var(--delete-icon-hover);
+}
+
+.colors-wrapper li:first-of-type .bx-up-arrow-alt,
+.colors-wrapper li:last-of-type .bx-down-arrow-alt {
+    cursor: default;
+    color: var(--grey-500);
+}
+
+@media (max-height: 800px) {
+    .colors-wrapper {
+        height: 300px;
+    }
+}
+
+@media (max-height: 650px) {
+    .colors-wrapper {
+        height: 200px;
+    }
+}

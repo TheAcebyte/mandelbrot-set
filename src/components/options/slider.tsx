@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { getMin, getMax, map } from '../../utils.ts';
+import { getMin, getMax, mapInt } from '../../libs/utils.ts';
 import './slider.css';
 
 type SliderProps = {
+    getter: number,
     setter: any,
     base: number,
     min: number,
@@ -10,7 +11,7 @@ type SliderProps = {
     step: number
 }
 
-function Slider({ setter, base, min, max, step }: SliderProps) {
+function Slider({ getter, setter, base, min, max, step }: SliderProps) {
     const active = useRef<boolean>(false);
     const setActive = (value: boolean) => active.current = value;
 
@@ -27,15 +28,15 @@ function Slider({ setter, base, min, max, step }: SliderProps) {
         if (active.current) {
             const sliderRect = sliderRef.current!.getBoundingClientRect();
             const boundedX = getMin(getMax(x - sliderRect.x, 0), sliderRect.width);
-            const value = map(boundedX, 0, sliderRect.width, min, max, step);
+            const value = mapInt(boundedX, 0, sliderRect.width, min, max, step);
             updateSlider(value);
         }
     }
     
     const updateSlider = (value: number) => {
         setter(value);
-        const left = map(value, min, max, 2.5, 97.5);
-        const width = map(value, min, max, 0, 100);
+        const left = mapInt(value, min, max, 2.5, 97.5);
+        const width = mapInt(value, min, max, 0, 100);
 
         circleRef.current!.style.left = `${left}%`;
         fillerRef.current!.style.width = `${width}%`;
@@ -69,9 +70,15 @@ function Slider({ setter, base, min, max, step }: SliderProps) {
     }, []);
 
     return (
-        <div className="slider" ref={sliderRef} onMouseDown={startSliderMouse} onTouchStart={startSliderTouch}>
-            <div className="circle" ref={circleRef}></div>
-            <div className="filler" ref={fillerRef}></div>
+        <div className="option">
+            <div className="option-header">
+                <h2>Max Iterations</h2>
+                <p className="stat">{getter}</p>
+            </div>
+            <div className="slider" ref={sliderRef} onMouseDown={startSliderMouse} onTouchStart={startSliderTouch}>
+                <div className="circle" ref={circleRef}></div>
+                <div className="filler" ref={fillerRef}></div>
+            </div>
         </div>
     );
 }

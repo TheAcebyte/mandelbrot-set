@@ -1,3 +1,9 @@
+.option-header .stat {
+    color: var(--gray-200);
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
 .slider {
     height: 10px;
     border-radius: 8px;

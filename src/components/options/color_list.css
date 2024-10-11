@@ -103,8 +103,14 @@
     }
 }
 
-@media (max-height: 650px) {
+@media (max-height: 725px) {
     .colors-wrapper {
         height: 200px;
+    }
+}
+
+@media (max-height: 600px) {
+    .colors-wrapper {
+        height: 100px;
     }
 }

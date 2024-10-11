@@ -1,20 +1,17 @@
-import { getMin, mapFloat } from './utils.ts';
+import { mapFloat } from './utils.ts';
 
-function drawMandelbrot(canvas: HTMLCanvasElement, maxIterations: number, colors: string[]) {
-    colorCanvas(canvas, maxIterations, colors);
-    const size = getMin(canvas.width, canvas.height);
+function drawMandelbrot(canvas: HTMLCanvasElement, maxIterations: number, colors: string[], scale: number, centerX: number, centerY: number) {
+    const scaleX = canvas.width > canvas.height ? scale * canvas.width / canvas.height : scale;
+    const scaleY = canvas.height > canvas.width ? scale * canvas.height / canvas.width : scale;
 
-    const centerWidth = size == canvas.height ? (canvas.width >> 1) - (size >> 1) : 0;
-    const centerHeight = size == canvas.width ? (canvas.height >> 1) - (size >> 1) : 0;
-
-    for (let x = 0; x < size; x++) {
-        for (let y = 0; y < size; y++) {
-            const originX = mapFloat(x, 0, size, -2, 2);
-            const originY = mapFloat(y, 0, size, -2, 2);
+    for (let x = 0; x < canvas.width; x++) {
+        for (let y = 0; y < canvas.height; y++) {
+            const originX = centerX + mapFloat(x, 0, canvas.width, -scaleX, scaleX);
+            const originY = centerY + mapFloat(y, 0, canvas.height, -scaleY, scaleY);
             
             const iteration = getEscapeTime(originX, originY, maxIterations);
             const color = getColor(iteration, maxIterations, colors);
-            drawPoint(canvas, x + centerWidth, y + centerHeight, color);
+            drawPoint(canvas, x, y, color);
         }
     }
 }
@@ -52,10 +49,6 @@ function drawPoint(canvas: HTMLCanvasElement, x: number, y: number, color: strin
 function resizeCanvas(canvas: HTMLCanvasElement, width: number, height: number) {
     canvas.width = width;
     canvas.height = height;
-}
-
-function colorCanvas(canvas: HTMLElement, maxIterations: number, colors: string[]) {
-    canvas.style.backgroundColor = getColor(2, maxIterations, colors);
 }
 
 export { drawMandelbrot, resizeCanvas };

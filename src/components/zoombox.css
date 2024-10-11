@@ -1,0 +1,22 @@
+.zoombox {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}
+
+.zoombox i {
+    color: var(--grey-200);
+    font-size: 2.5rem;
+    transition: color 0.1s, font-size 0.1s;
+    cursor: pointer;
+}
+
+.zoombox i:hover {
+    color: var(--grey-50) !important;
+    font-size: 2.75rem !important;
+}

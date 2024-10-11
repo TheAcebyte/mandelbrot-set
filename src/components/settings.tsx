@@ -8,10 +8,13 @@ type settingsProps = {
     iterSetter: any,
     colorGetter: string[],
     colorSetter: any
+    zoomGetter: number,
+    zoomSetter: any
 }
 
 const baseSettings = {
     maxIterations: 100,
+    zoomMultiplier: 2,
     colors: [
         "#421e0f",
         "#19071a",
@@ -56,18 +59,21 @@ function Cogs({ parentRef }: { parentRef: any }) {
     );
 }
 
-function Settings({ iterGetter, iterSetter, colorGetter, colorSetter }: settingsProps) {
+function Settings({ iterGetter, iterSetter, colorGetter, colorSetter, zoomGetter, zoomSetter }: settingsProps) {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const [maxIterations, setMaxIterations] = useState(iterGetter);
+    const [zoomMultiplier, setZoomMultiplier] = useState(zoomGetter);
     const [colors, setColors] = useState(colorGetter);
     
     useEffect(() => {
         iterSetter(baseSettings.maxIterations);
+        zoomSetter(1 / baseSettings.zoomMultiplier);
         colorSetter(baseSettings.colors);
     }, []);
 
     const applySettings = () => {
         iterSetter(maxIterations);
+        zoomSetter(1 / zoomMultiplier);
         colorSetter(colors);
     }
 
@@ -77,7 +83,8 @@ function Settings({ iterGetter, iterSetter, colorGetter, colorSetter }: settings
                 <div className="title">
                     <h1>Settings</h1>
                 </div>
-                <Slider getter={maxIterations} setter={setMaxIterations} base={baseSettings.maxIterations} min={10} max={200} step={1}/>
+                <Slider name="Max Iterations" getter={maxIterations} setter={setMaxIterations} base={baseSettings.maxIterations} min={10} max={200} step={1} precision={0}/>
+                <Slider name="Zoom Multiplier" getter={zoomMultiplier} setter={setZoomMultiplier} base={baseSettings.zoomMultiplier} min={0.25} max={10} step={0.25} precision={2}/>
                 <ColorList getter={colors} setter={setColors} base={baseSettings.colors}/>
             </div>
 

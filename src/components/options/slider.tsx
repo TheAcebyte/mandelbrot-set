@@ -3,15 +3,17 @@ import { getMin, getMax, mapInt } from '../../libs/utils.ts';
 import './slider.css';
 
 type SliderProps = {
+    name: string
     getter: number,
     setter: any,
     base: number,
     min: number,
     max: number,
-    step: number
+    step: number,
+    precision: number
 }
 
-function Slider({ getter, setter, base, min, max, step }: SliderProps) {
+function Slider({ name, getter, setter, base, min, max, step, precision }: SliderProps) {
     const active = useRef<boolean>(false);
     const setActive = (value: boolean) => active.current = value;
 
@@ -72,8 +74,8 @@ function Slider({ getter, setter, base, min, max, step }: SliderProps) {
     return (
         <div className="option">
             <div className="option-header">
-                <h2>Max Iterations</h2>
-                <p className="stat">{getter}</p>
+                <h2>{name}</h2>
+                <p className="stat">{getter.toFixed(precision)}</p>
             </div>
             <div className="slider" ref={sliderRef} onMouseDown={startSliderMouse} onTouchStart={startSliderTouch}>
                 <div className="circle" ref={circleRef}></div>

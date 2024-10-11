@@ -1,6 +1,6 @@
 # Mandelbrot Set
 ## About
-Just a quick visualizer of the Mandelbrot Set using **React** with **Typescript**. 
+Just a quick visualizer of the Mandelbrot Set using **React** with **TypeScript**. 
 
 You can tweak the settings through the sidebar, which can be accessed by clicking the icon on the left. Use the top-right icons to zoom in or reset your view.
 

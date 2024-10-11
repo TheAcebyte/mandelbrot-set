@@ -11,4 +11,4 @@ To apply any changes, make sure to click the button at the bottom of the sidebar
 - **Colors**
 
 ## License
-Feel free to redistribute modify this project under the [**MIT** license](LICENSE).
+Feel free to redistribute or modify this project under the [**MIT** license](LICENSE).

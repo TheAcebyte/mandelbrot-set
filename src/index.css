@@ -37,8 +37,8 @@
 
 * {
     box-sizing: border-box;
+    touch-action: pan-y;
     user-select: none;
-    touch-action: none;
     padding: 0;
     margin: 0;
 }
